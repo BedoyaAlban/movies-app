@@ -1,45 +1,53 @@
 import React from "react";
 
-const Pagination = () => {
+const Pagination = ({ page, setPage, numbPages }) => {
   return (
     <nav className="pagination" role="navigation" aria-label="pagination">
-      <a className="pagination-previous">Previous</a>
-      <a className="pagination-next">Next page</a>
+      <button
+        className="pagination-previous is-clickable"
+        onClick={() => (page !== 1 ? setPage(page - 1) : setPage(page))}
+      >
+        Previous
+      </button>
+      <button
+        className="pagination-next is-clickable"
+        onClick={() => (page !== numbPages ? setPage(page + 1) : setPage(page))}
+      >
+        Next page
+      </button>
       <ul className="pagination-list">
         <li>
-          <a className="pagination-link" aria-label="Goto page 1">
+          <button
+            className="pagination-link is-clickable"
+            aria-label="Goto page 1"
+            onClick={() => setPage(1)}
+          >
             1
-          </a>
+          </button>
         </li>
         <li>
           <span className="pagination-ellipsis">&hellip;</span>
         </li>
         <li>
-          <a className="pagination-link" aria-label="Goto page 45">
-            45
-          </a>
-        </li>
-        <li>
-          <a
-            className="pagination-link is-current"
+          <button
+            className="pagination-link is-current is-disabled"
             aria-label="Page 46"
             aria-current="page"
           >
-            46
-          </a>
-        </li>
-        <li>
-          <a className="pagination-link" aria-label="Goto page 47">
-            47
-          </a>
+            {page}
+          </button>
         </li>
         <li>
           <span className="pagination-ellipsis">&hellip;</span>
         </li>
         <li>
-          <a className="pagination-link" aria-label="Goto page 86">
-            86
-          </a>
+          <button
+            className="pagination-link is-clickable"
+            aria-label="Goto page 86"
+            onClick={() => setPage(numbPages)}
+          >
+            {numbPages}
+          </button>
         </li>
       </ul>
     </nav>

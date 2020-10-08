@@ -1,4 +1,8 @@
-import { faHeart, faVoteYea } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChalkboardTeacher,
+  faHeart,
+  faVoteYea
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -14,23 +18,25 @@ const API_KEY = process.env.REACT_APP_API_KEY;
   - set Filters
   - Add router onClick page for a Movie with the details
 */
+
 const Movies = () => {
   const [status, setStatus] = useState("popular");
-  const url = `https://api.themoviedb.org/3/movie/${status}?api_key=${API_KEY}`;
+  const [page, setPage] = useState(1);
+  const [numbPages, setNumbPages] = useState(0);
+  const url = `https://api.themoviedb.org/3/movie/${status}?api_key=${API_KEY}&page=${page}`;
   const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    getMovies();
-  }, []);
 
   const getMovies = () => {
     axios.get(url).then(res => {
+      const totalPages = res.data.total_pages;
+      setNumbPages(totalPages);
       const popularMovies = res.data.results;
       setMovies(popularMovies);
     });
   };
 
-  console.log(movies);
+  useEffect(getMovies, [page]);
+
   return (
     <div>
       <h1 className="title">Movies</h1>
@@ -48,11 +54,14 @@ const Movies = () => {
                   <div className="card-content">
                     <div className="media">
                       <div className="media-content">
-                        <p className="title is-4">{movie.title}</p>
-                      </div>
-                      <div className="media-content">
                         <span className="icon is-small">
                           <FontAwesomeIcon icon={faHeart} />
+                        </span>
+                        <span>{movie.vote_average}</span>
+                      </div>
+                      <div className="media-content is-block">
+                        <span className="icon is-small">
+                          <FontAwesomeIcon icon={faChalkboardTeacher} />
                         </span>
                         <span>{movie.popularity}</span>
                       </div>
@@ -63,15 +72,13 @@ const Movies = () => {
                         <span>{movie.vote_count}</span>
                       </div>
                     </div>
-
-                    <div className="content">{movie.overview}</div>
                   </div>
                 </div>
               </div>
             ))
           : null}
       </div>
-      <Pagination />
+      <Pagination page={page} setPage={setPage} numbPages={numbPages} />
     </div>
   );
 };
