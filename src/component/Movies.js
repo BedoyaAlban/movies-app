@@ -6,6 +6,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import NavBar from "./NavBar";
 import Pagination from "./Pagination";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -35,16 +36,17 @@ const Movies = () => {
     });
   };
 
-  useEffect(getMovies, [page]);
+  useEffect(getMovies, [page, status]);
 
   return (
     <div>
-      <h1 className="title">Movies</h1>
+      <h1 className="title has-text-centered">Movies ({status})</h1>
+      <NavBar status={status} setStatus={setStatus} />
       <div className="columns is-multiline is-mobile">
         {movies
           ? movies.map(movie => (
               <div className="column is-one-quarter" key={movie.id}>
-                <div className="card">
+                <div className="card is-clickable">
                   <div className="card-image">
                     <img
                       src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}

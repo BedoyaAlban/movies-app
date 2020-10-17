@@ -1,7 +1,7 @@
 import React from "react";
 import Camera from "../video-camera.svg";
 
-const NavBar = () => {
+const NavBar = ({ status, setStatus }) => {
   return (
     <nav className="navbar is-transparent">
       <div className="navbar-brand">
@@ -22,56 +22,26 @@ const NavBar = () => {
         <div className="navbar-start">
           <span className="navbar-item">Movies</span>
           <div className="navbar-item has-dropdown is-hoverable">
-            <a
-              className="navbar-link"
-              href="https://bulma.io/documentation/overview/start/"
-            >
-              Filter
-            </a>
-            <div className="navbar-dropdown is-boxed">
-              <a
-                className="navbar-item"
-                href="https://bulma.io/documentation/overview/start/"
+            <div className="navbar-item">Filter</div>
+            <div className="is-inline-flex">
+              <button
+                className="navbar-item is-clickable button is-link is-outlined ml-1"
+                onClick={() => setStatus("now_playing")}
               >
-                Overview
-              </a>
-              <a
-                className="navbar-item"
-                href="https://bulma.io/documentation/overview/modifiers/"
+                Now Playing
+              </button>
+              <button
+                className="navbar-item is-clickable button is-primary is-outlined ml-1"
+                onClick={() => setStatus("top_rated")}
               >
-                Modifiers
-              </a>
-              <a
-                className="navbar-item"
-                href="https://bulma.io/documentation/columns/basics/"
+                Top Rated
+              </button>
+              <button
+                className="navbar-item is-clickable button is-danger is-outlined ml-1"
+                onClick={() => setStatus("upcoming")}
               >
-                Columns
-              </a>
-              <a
-                className="navbar-item"
-                href="https://bulma.io/documentation/layout/container/"
-              >
-                Layout
-              </a>
-              <a
-                className="navbar-item"
-                href="https://bulma.io/documentation/form/general/"
-              >
-                Form
-              </a>
-              <hr className="navbar-divider" />
-              <a
-                className="navbar-item"
-                href="https://bulma.io/documentation/elements/box/"
-              >
-                Elements
-              </a>
-              <a
-                className="navbar-item is-active"
-                href="https://bulma.io/documentation/components/breadcrumb/"
-              >
-                Components
-              </a>
+                Upcoming
+              </button>
             </div>
           </div>
         </div>

@@ -31,7 +31,7 @@ const Pagination = ({ page, setPage, numbPages }) => {
         <li>
           <button
             className="pagination-link is-current is-disabled"
-            aria-label="Page 46"
+            aria-label={"Page" + page}
             aria-current="page"
           >
             {page}
@@ -43,7 +43,7 @@ const Pagination = ({ page, setPage, numbPages }) => {
         <li>
           <button
             className="pagination-link is-clickable"
-            aria-label="Goto page 86"
+            aria-label={"Goto" + numbPages}
             onClick={() => setPage(numbPages)}
           >
             {numbPages}

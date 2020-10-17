@@ -3,3 +3,7 @@
   color: #fff;
   border-color: transparent !important;
 }
+
+.navbar.is-transparent {
+  align-items: center;
+}
