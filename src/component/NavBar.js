@@ -1,13 +1,16 @@
 import React from "react";
 import Camera from "../video-camera.svg";
 
-const NavBar = ({ status, setStatus }) => {
+const NavBar = ({ setStatus }) => {
   return (
-    <nav className="navbar is-transparent">
+    <nav className="navbar is-transparent m-4">
       <div className="navbar-brand">
-        <a className="navbar-item" href="#home">
-          <img src={Camera} alt="camera" width="112" height="28" />
-        </a>
+        <div
+          className="navbar-item is-clickable"
+          onClick={() => setStatus("popular")}
+        >
+          <img src={Camera} alt="camera" width="112" height="40" />
+        </div>
         <div
           className="navbar-burger burger"
           data-target="navbarExampleTransparentExample"
@@ -20,8 +23,7 @@ const NavBar = ({ status, setStatus }) => {
 
       <div id="navbarExampleTransparentExample" className="navbar-menu">
         <div className="navbar-start">
-          <span className="navbar-item">Movies</span>
-          <div className="navbar-item has-dropdown is-hoverable">
+          <div className="navbar-item">
             <div className="navbar-item">Filter</div>
             <div className="is-inline-flex">
               <button
@@ -31,13 +33,13 @@ const NavBar = ({ status, setStatus }) => {
                 Now Playing
               </button>
               <button
-                className="navbar-item is-clickable button is-primary is-outlined ml-1"
+                className="navbar-item is-clickable button is-success is-outlined ml-1"
                 onClick={() => setStatus("top_rated")}
               >
                 Top Rated
               </button>
               <button
-                className="navbar-item is-clickable button is-danger is-outlined ml-1"
+                className="navbar-item is-clickable button is-warning is-outlined ml-1"
                 onClick={() => setStatus("upcoming")}
               >
                 Upcoming
@@ -45,6 +47,9 @@ const NavBar = ({ status, setStatus }) => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="navbar-end">
+        <input className="input" type="text" placeholder="Search Movie" />
       </div>
     </nav>
   );

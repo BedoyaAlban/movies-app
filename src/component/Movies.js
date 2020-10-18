@@ -40,7 +40,9 @@ const Movies = () => {
 
   return (
     <div>
-      <h1 className="title has-text-centered">Movies ({status})</h1>
+      <h1 className="title has-text-centered">
+        Movies ({status.toUpperCase()})
+      </h1>
       <NavBar status={status} setStatus={setStatus} />
       <div className="columns is-multiline is-mobile">
         {movies
@@ -55,23 +57,31 @@ const Movies = () => {
                   </div>
                   <div className="card-content">
                     <div className="media">
-                      <div className="media-content">
+                      <div
+                        className={
+                          movie.vote_average && movie.vote_average > 7
+                            ? "media-content has-text-success"
+                            : movie.vote_average > 6
+                            ? "media-content has-text-link"
+                            : "media-content has-text-danger"
+                        }
+                      >
                         <span className="icon is-small">
                           <FontAwesomeIcon icon={faHeart} />
                         </span>
-                        <span>{movie.vote_average}</span>
+                        <span className="ml-2">{movie.vote_average}</span>
                       </div>
                       <div className="media-content is-block">
                         <span className="icon is-small">
                           <FontAwesomeIcon icon={faChalkboardTeacher} />
                         </span>
-                        <span>{movie.popularity}</span>
+                        <span className="ml-2">{movie.popularity}</span>
                       </div>
                       <div className="media-content">
                         <span className="icon is-small">
                           <FontAwesomeIcon icon={faVoteYea} />
                         </span>
-                        <span>{movie.vote_count}</span>
+                        <span className="ml-2">{movie.vote_count}</span>
                       </div>
                     </div>
                   </div>

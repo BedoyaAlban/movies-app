@@ -7,3 +7,7 @@
 .navbar.is-transparent {
   align-items: center;
 }
+
+.navbar-item img {
+  max-height: 2.5rem;
+}
