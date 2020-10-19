@@ -24,36 +24,58 @@ const Movies = () => {
   const [status, setStatus] = useState("popular");
   const [page, setPage] = useState(1);
   const [numbPages, setNumbPages] = useState(0);
-  const url = `https://api.themoviedb.org/3/movie/${status}?api_key=${API_KEY}&page=${page}`;
+  const url = `https://api.themoviedb.org/3/`;
   const [movies, setMovies] = useState([]);
+  const [movie, setMovie] = useState([]);
+  const [searchMovie, setSearchMovie] = useState("");
 
   const getMovies = () => {
-    axios.get(url).then(res => {
-      const totalPages = res.data.total_pages;
-      setNumbPages(totalPages);
-      const popularMovies = res.data.results;
-      setMovies(popularMovies);
-    });
+    axios
+      .get(url + `movie/${status}?api_key=${API_KEY}&page=${page}`)
+      .then(res => {
+        const totalPages = res.data.total_pages;
+        setNumbPages(totalPages);
+        const popularMovies = res.data.results;
+        setMovies(popularMovies);
+      });
   };
 
   useEffect(getMovies, [page, status]);
+
+  const getMovie = () => {
+    axios
+      .get(url + `search/movie/?api_key=${API_KEY}&query=${searchMovie}`)
+      .then(res => {
+        const result = res.data.results;
+        setMovie(result);
+      });
+  };
+
+  useEffect(getMovie, [searchMovie]);
 
   return (
     <div>
       <h1 className="title has-text-centered">
         Movies ({status.toUpperCase()})
       </h1>
-      <NavBar status={status} setStatus={setStatus} />
+      <NavBar
+        status={status}
+        setStatus={setStatus}
+        searchMovie={searchMovie}
+        setSearchMovie={setSearchMovie}
+      />
       <div className="columns is-multiline is-mobile">
         {movies
           ? movies.map(movie => (
               <div className="column is-one-quarter" key={movie.id}>
                 <div className="card is-clickable">
                   <div className="card-image">
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                      alt="Movie poster"
-                    />
+                    <figure className="image">
+                      <img
+                        src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                        alt="Movie poster"
+                      />
+                    </figure>
                   </div>
                   <div className="card-content">
                     <div className="media">

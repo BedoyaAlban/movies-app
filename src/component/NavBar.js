@@ -1,7 +1,7 @@
 import React from "react";
 import Camera from "../video-camera.svg";
 
-const NavBar = ({ setStatus }) => {
+const NavBar = ({ setStatus, searchMovie, setSearchMovie }) => {
   return (
     <nav className="navbar is-transparent m-4">
       <div className="navbar-brand">
@@ -49,7 +49,13 @@ const NavBar = ({ setStatus }) => {
         </div>
       </div>
       <div className="navbar-end">
-        <input className="input" type="text" placeholder="Search Movie" />
+        <input
+          className="input"
+          type="text"
+          placeholder="Search Movie"
+          value={searchMovie}
+          onChange={() => {}}
+        />
       </div>
     </nav>
   );
